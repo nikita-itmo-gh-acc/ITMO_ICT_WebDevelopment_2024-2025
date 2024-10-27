@@ -11,14 +11,14 @@ threads = []
 connections = []
 
 
-def threaded_handle(conn, address):
+def threaded_handle(conn, address, inx):
     while True:
         data = conn.recv(1024)
         if not data:
             conn.close()
             print(f"{address} connection interrupted")
             break
-        msg = address[0] + ":" + str(address[1]) + " said " + data.decode()
+        msg = str(inx) + ":" + " said " + data.decode()
         print(msg)
         with locker:
             conn_copy = copy(connections)
@@ -38,7 +38,7 @@ def main():
 
     while listening:
         conn_socket, addr = serv_socket.accept()
-        conn_thread = threading.Thread(target=threaded_handle, args=(conn_socket, addr,))
+        conn_thread = threading.Thread(target=threaded_handle, args=(conn_socket, addr, len(connections)))
         threads.append(conn_thread)
         connections.append(conn_socket)
         conn_thread.start()

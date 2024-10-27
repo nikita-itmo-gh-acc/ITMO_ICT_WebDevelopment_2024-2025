@@ -16,5 +16,5 @@ while getting_data:
     if not serv_response:
         client_socket.close()
         break
-    print(serv_response)
+    print(serv_response.decode())
 
