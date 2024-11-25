@@ -7,5 +7,10 @@ nav:
     - 3 task : lab_1/task3.md
     - 4 task : lab_1/task4.md
     - 5 task : lab_1/task5.md
+  - lab_2:
+      - main : lab_2/main.md
+      - register : lab_2/register.md
+      - hotel_logic : lab_2/hotels.md
+      - bookings: lab_2/booking.md
 theme:
   name: material
