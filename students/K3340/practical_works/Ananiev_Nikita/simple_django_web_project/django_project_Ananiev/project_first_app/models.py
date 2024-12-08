@@ -27,7 +27,7 @@ class CarOwner(AbstractUser):
 
 
 class Ownership(models.Model):
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='ownerships')
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     begin_date = models.DateField(null=False)
     end_date = models.DateField(null=True)
