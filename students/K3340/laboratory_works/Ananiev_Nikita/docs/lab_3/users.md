@@ -1,10 +1,8 @@
-from django.db import models
-from django.conf import settings
-from django.utils import timezone
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from .user_manager import AccountManager
+## Приложение auth_api.
+### Назначение: отвечает за запросы связанные с пользователями, авторизованными в системе
 
-
+### models.py:
+```python
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name='email_address', unique=True, max_length=64)
     firstname = models.CharField(max_length=30, null=False)
@@ -37,3 +35,31 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}. Дата рождения: {self.birth_date}. эл. почта: {self.email}"
+```
+
+### serializers.py:
+```python
+from rest_framework import serializers
+from .models import UserAccount
+
+class CustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserAccount
+        fields = ['email', 'firstname', 'lastname', 'phone']
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserAccount
+        fields = ['email', 'firstname', 'lastname', 'phone', 'birth_date', 'password']
+```
+
+### urls.py:
+```python
+urlpatterns = [
+    path("users/<int:id>/", UserAPIView.as_view(), name="get_client"),
+    path("users/list/", UserListAPIView.as_view(), name="get_client_list"),
+    path("users/<int:id>/update", UserUpdateAPIView.as_view(), name="update_client"),
+]
+```
+

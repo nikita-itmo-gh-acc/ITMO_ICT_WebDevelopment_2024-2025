@@ -2,7 +2,7 @@ from django.urls import path
 from .views import *
 
 
-app_name = "booking_api"
+app_name = "auth_api"
 
 urlpatterns = [
     path("users/<int:id>/", UserAPIView.as_view(), name="get_client"),
