@@ -18,5 +18,9 @@ nav:
       - rooms : lab_3/rooms.md
       - bookings : lab_3/bookings.md
       - employees : lab_3/employees.md
+      - endpoints :
+          - users/{from_town}[GET] : lab_3/endpoints/users_town.md
+          - bookings/add[POST] : lab_3/endpoints/add_booking.md
+          - /rooms/{id}/users/{from}/{to}[GET] : lab_3/endpoints/room_users.md
 theme:
   name: material

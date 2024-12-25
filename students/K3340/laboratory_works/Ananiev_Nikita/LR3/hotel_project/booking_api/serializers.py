@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from .models import Booking
 from hotel_api.serializers import RoomSerializer
-from auth_api.serializers import CustomUserSerializer
+from auth_api.nested_serializers import NestedUserSerializer
 
 
 class BookingDetailedSerializer(serializers.ModelSerializer):
-    client = CustomUserSerializer()
+    client = NestedUserSerializer()
     room = RoomSerializer()
     class Meta:
         model = Booking

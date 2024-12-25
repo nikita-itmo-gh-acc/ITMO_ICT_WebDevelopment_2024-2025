@@ -44,8 +44,9 @@ class Contract(models.Model):
 
 
 class WorkSchedule(models.Model):
-    start_time = models.DateTimeField(null=False)
-    end_time = models.DateTimeField(null=True)
+    date = models.DateField(null=False)
+    start_time = models.TimeField(null=False)
+    end_time = models.TimeField(null=True)
     is_done = models.BooleanField(default=False)
     contract = models.ForeignKey('Contract', on_delete=models.CASCADE, null=False, related_name='work_schedule')
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=False, related_name='work_schedule')
