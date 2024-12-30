@@ -28,13 +28,13 @@ class BookingCreateAPIView(generics.CreateAPIView):
 
 class BookingUpdateAPIView(generics.UpdateAPIView):
     serializer_class = BookingUpdateSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
     lookup_field = 'id'
     queryset = Booking.objects.all()
 
 
 class BookingDeleteAPIView(generics.DestroyAPIView):
     serializer_class = BookingSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
     lookup_field = 'id'
     queryset = Booking.objects.all()

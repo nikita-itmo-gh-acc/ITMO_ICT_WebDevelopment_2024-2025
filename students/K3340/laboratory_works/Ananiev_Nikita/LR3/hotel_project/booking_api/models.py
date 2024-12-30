@@ -7,6 +7,8 @@ from auth_api.models import UserAccount
 class Booking(models.Model):
     booking_date = models.DateField(null=False, default=timezone.now)
     from_town = models.CharField(max_length=30)
+    planned_begin_date = models.DateField(null=False, default=timezone.now)
+    planned_end_date = models.DateField(null=False, default=timezone.now)
     check_in_time = models.DateTimeField(null=True)
     departure_time = models.DateTimeField(null=True)
     full_days = models.IntegerField(default=0)

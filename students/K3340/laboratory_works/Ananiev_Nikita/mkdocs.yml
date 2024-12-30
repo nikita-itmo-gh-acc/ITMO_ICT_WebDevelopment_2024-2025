@@ -22,5 +22,10 @@ nav:
           - users/{from_town}[GET] : lab_3/endpoints/users_town.md
           - bookings/add[POST] : lab_3/endpoints/add_booking.md
           - /rooms/{id}/users/{from}/{to}[GET] : lab_3/endpoints/room_users.md
+  - lab_4:
+      - main : lab_4/main.md
+      - authorization : lab_4/auth.md
+      - registration : lab_4/reg.md
+      - room_list : lab_4/room_list.md
 theme:
   name: material
