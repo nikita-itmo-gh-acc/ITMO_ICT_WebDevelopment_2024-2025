@@ -77,3 +77,9 @@ export default {
     }
 }
 ```
+
+## Внешний вид списка номеров
+![alt text](https://raw.githubusercontent.com/nikita-itmo-gh-acc/ITMO_ICT_WebDevelopment_2024-2025/refs/heads/main/students/K3340/laboratory_works/Ananiev_Nikita/site/assets/images/room_list.jpg)
+
+## Непосредственно бронирование
+![alt text](https://raw.githubusercontent.com/nikita-itmo-gh-acc/ITMO_ICT_WebDevelopment_2024-2025/refs/heads/main/students/K3340/laboratory_works/Ananiev_Nikita/site/assets/images/booking.jpg)

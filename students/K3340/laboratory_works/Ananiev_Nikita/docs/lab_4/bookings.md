@@ -90,3 +90,12 @@
         }
     }
 ```
+
+## Внешний вид истории бронирований
+![alt text](https://raw.githubusercontent.com/nikita-itmo-gh-acc/ITMO_ICT_WebDevelopment_2024-2025/refs/heads/main/students/K3340/laboratory_works/Ananiev_Nikita/site/assets/images/book_history.jpg)
+
+## Можем отредактировать даты
+![alt text](https://raw.githubusercontent.com/nikita-itmo-gh-acc/ITMO_ICT_WebDevelopment_2024-2025/refs/heads/main/students/K3340/laboratory_works/Ananiev_Nikita/site/assets/images/update_book.jpg)
+
+## Можем удалить бронь
+![alt text](https://raw.githubusercontent.com/nikita-itmo-gh-acc/ITMO_ICT_WebDevelopment_2024-2025/refs/heads/main/students/K3340/laboratory_works/Ananiev_Nikita/site/assets/images/delete_book.jpg)
