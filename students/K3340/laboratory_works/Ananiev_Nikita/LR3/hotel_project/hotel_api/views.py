@@ -10,7 +10,7 @@ from .serializers import *
 
 
 class RoomAPIView(generics.RetrieveAPIView):
-    serializer_class = RoomDetailedSerializer
+    serializer_class = RoomSerializer
     lookup_field = 'id'
     queryset = Room.objects.all()
 

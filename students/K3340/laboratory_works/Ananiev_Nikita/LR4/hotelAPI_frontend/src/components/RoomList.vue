@@ -3,20 +3,27 @@
     <Booking :show_list="true" ref="create" @update-state="showList"/>
     <h1 v-if="show_list" style="text-align: center;">Список номеров</h1>
     <div v-if="show_list" class="rooms__container">
-        <div class="room__card" v-for="room in rooms">
+        <div class="room__card" v-for="room in paginated">
             <div><span style="font-size: large; font-weight: bold;">Номер {{ room.number }}</span></div>
-            <div><span>Площадь {{ room.area }}</span></div>
-            <div v-if="room.is_occupied">
-                <span>Занят на данный момент</span> <br>
-                <button class="book__button"  @click="showBooking(room.id)">Забронировать</button>
+            <div><span>Площадь: {{ room.area }} м^2</span></div>
+            <div><span>Стоимость: {{ room.room_type.prices[0].day_price }} $ / сутки</span></div>
+            <div v-show="room.is_occupied">
+                <span style="color: #E40066;">Занят на данный момент</span> <br>
+                <button class="book__button"  @click="showBooking(room)">Забронировать</button>
             </div>
-            <div v-if="!room.is_occupied">
-                <span>Свободен</span> <br>
-                <button class="book__button" @click="showBooking(room.id)">Забронировать</button>
+            <div v-show="!room.is_occupied">
+                <span style="color: green;">Свободен</span> <br>
+                <button class="book__button" @click="showBooking(room)">Забронировать</button>
             </div>
         </div>
     </div>
-    
+    <div v-if="show_list" class="pag__btns">
+        <label>Страница {{ page+1 }} из {{ max_page+1 }}</label>
+        <button v-if="page==0" disabled @click="prev()">Назад</button>
+        <button v-else @click="prev()">Назад</button>
+        <button v-if="page==max_page" disabled @click="next()">Вперед</button>
+        <button v-else @click="next()">Вперед</button>
+    </div>
 </template>
 
 <script>
@@ -31,16 +38,22 @@
         name: "Rooms",
         data() {
             return {
-                rooms: [],
+                all_rooms: [],
+                paginated: [],
+                page: 0,
+                max_page: Number,
+                rooms_per_page: 6,
+                selected_room: "",
                 show_list: true,
             }
         },
         methods: {
-            showBooking: function (id) {
+            showBooking: function (room) {
                 const user = JSON.parse(localStorage.getItem('user'));
                 if (user) {
+                    this.$refs.create.number = room.number
                     this.$refs.create.show = true
-                    this.$refs.create.booking.room = id
+                    this.$refs.create.booking.room = room.id
                     this.show_list = false
                 } else {
                     this.$router.push('/login');
@@ -51,10 +64,26 @@
                 this.$refs.create.show = false
                 this.show_list = true
             },
+            paginate() {
+                let start = this.rooms_per_page * this.page
+                let end = Math.min(start + this.rooms_per_page, this.all_rooms.length)
+                this.paginated = this.all_rooms.slice(start, end)
+            },
+            next() {
+                this.page++
+                this.paginate()
+            },
+            prev() {
+                if (this.page > 0)
+                    this.page--
+                this.paginate()
+            },
             async fetchRoomList () {
                 try {
                     const response = await axios.get('http://127.0.0.1:8000/rooms/list/');
-                    this.rooms = response.data
+                    this.all_rooms = response.data
+                    this.max_page =  Math.round(this.all_rooms.length / this.rooms_per_page)
+                    this.paginate()
                 } catch (e) {
                     if (e.response) {
                         switch (e.response.status) {
@@ -106,13 +135,22 @@
     }
 
     .book__button {
-        background-color: #42b983;
+        background-color: #1C7C54;
         color: white;
         border: none;
+        margin-top: 10px;
         padding: 10px 15px;
+        width: 100%;
         font-size: 16px;
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s;
+    }
+
+    .pag__btns {
+        margin-top: 5%;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
     }
 </style>

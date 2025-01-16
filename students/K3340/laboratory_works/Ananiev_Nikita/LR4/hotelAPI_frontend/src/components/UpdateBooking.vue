@@ -3,6 +3,7 @@
         <div class="modal">
             <div class="modal__close" @click="closeModal">&#10006;</div>
                 <h2>Редактирование брони</h2>
+                <label v-if="this.error_msg" style="color: red;">{{ this.error_msg }}</label>
                 <form @submit.prevent="updateBooking">
                     <div class="form__group">
                         <label for="beginDate">Запланированная дата начала</label>
@@ -29,6 +30,7 @@
                 endDate: '',
                 show: false,
                 bookingId: Number,
+                error_msg: '',
             }
         },
         methods: {
@@ -42,17 +44,18 @@
                         planned_begin_date: this.beginDate,
                         planned_end_date: this.endDate,
                     });
+                    this.closeModal();
+                    window.location.reload();
                 } catch (e) {
                     if (e.response) {
                         switch (e.response.status) {
                             case 401:
                                 break;
+                            case 400:
+                                this.error_msg = e.response.data['message']
                             default:
                         }
                     }
-                } finally {
-                    this.closeModal()
-                    window.location.reload();
                 }
             }
         } 

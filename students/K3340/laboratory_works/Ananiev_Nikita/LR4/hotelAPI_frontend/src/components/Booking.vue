@@ -1,6 +1,7 @@
 <template>
     <div v-if="show" class="booking__form__container">
-        <h2>Бронирование</h2>
+        <h2>Бронирование номера {{ number }}</h2>
+        <label v-if="this.error_message" style="color: red;">{{ this.error_message }}</label>
         <form @submit.prevent="createBooking">
             <div class="form__group">
                 <label for="booking.from_town">Укажите ваш город</label>
@@ -35,6 +36,8 @@
                     from_town: '',
                 },
                 show: false,
+                number: "",
+                error_message: "",
             }
         },
         props : [
@@ -52,11 +55,13 @@
                     await axios.post('http://127.0.0.1:8000/bookings/add/', this.booking);
                     this.$router.push('/bookings');
                 } catch (e) {
-                    alert('error');
                     if (e.response) {
                         switch (e.response.status) {
                             case 401:
                                 break;
+                            case 400:
+                                console.log(e.response.data)
+                                this.error_message = e.response.data["message"]
                             default:
                         }
                     }

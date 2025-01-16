@@ -2,6 +2,7 @@
     <div class="auth__container">
         <div class="auth__form">
             <h1 style="text-align: center;">Авторизация</h1>
+            <label v-if="this.error_msg" style="color: red;">{{ this.error_msg }}</label>
             <form id="__auth__form" @submit.prevent="authUser">
                 <div class="form__group">
                     <label for="email">Эл. почта</label>
@@ -25,11 +26,13 @@
             return {
                 email: "",
                 password: "",
+                error_msg: "",
             }
         },
         methods: {
             async authUser() {
                 try {
+                    console.log(this.email, this.password)
                     const response = await axios.post('http://127.0.0.1:8000/auth/token/login', {
                         password: this.password,
                         email: this.email,
@@ -48,6 +51,8 @@
                                 console.log('delete token')
                                 delete axios.defaults.headers.common["Authorization"];
                                 break;
+                            case 400:
+                                this.error_msg = "Неверные логин или пароль. Проверьте пожалуйста данные для входа"
                             default:
                         }
                     }

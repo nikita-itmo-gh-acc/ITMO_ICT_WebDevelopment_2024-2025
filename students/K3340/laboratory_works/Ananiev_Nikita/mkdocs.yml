@@ -27,5 +27,6 @@ nav:
       - authorization : lab_4/auth.md
       - registration : lab_4/reg.md
       - room_list : lab_4/room_list.md
+      - bookings : lab_4/bookings.md
 theme:
   name: material

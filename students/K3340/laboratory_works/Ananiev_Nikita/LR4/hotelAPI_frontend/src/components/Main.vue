@@ -1,6 +1,6 @@
 <template>
     <Base />
-    <h1 style="text-align: center;">Главная</h1>
+    <h1 style="text-align: center;">Главная Страница</h1>
 </template>
 
 <script>

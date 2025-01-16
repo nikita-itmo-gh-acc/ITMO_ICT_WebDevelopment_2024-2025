@@ -1,5 +1,7 @@
 <template>
     <h1 style="text-align: center;"> Вы успешно вышли из аккаунта </h1>
+    <div id="__btn__div"><a class="button__home" href="/">Вернуться на главную</a></div>
+    
 </template>
 
 <script>
@@ -42,5 +44,27 @@
 </script>
     
 <style>
+    .button__home {
+        display: inline-block; 
+        padding: 10px 20px; 
+        font-size: 16px;
+        text-align: center; 
+        text-decoration: none; 
+        cursor: pointer; 
+        border: none; 
+        border-radius: 5px; 
+        background-color: #3498db; 
+        color: #ffffff; 
+        transition: background-color 0.3s ease; 
+    }
 
+    .button__home:hover {
+        background-color: #2980b9; 
+    }
+
+    #__btn__div {
+        display: flex;
+        justify-content: center;
+        /* border: 1px solid; */
+    }
 </style>
